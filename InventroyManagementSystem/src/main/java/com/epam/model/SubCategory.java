@@ -5,7 +5,15 @@ public class SubCategory {
    private int subcategory_id;
    private String subcategory_name;
    
-   public int getMaincategory_id() {
+   public SubCategory(int maincategory_id, int subcategory_id, String subcategory_name) {
+	this.maincategory_id = maincategory_id;
+	this.subcategory_id = subcategory_id;
+	this.subcategory_name = subcategory_name;
+}
+   
+   
+   
+public int getMaincategory_id() {
 	return maincategory_id;
 }
 public void setMaincategory_id(int maincategory_id) {

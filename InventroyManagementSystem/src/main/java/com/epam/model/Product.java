@@ -1,6 +1,7 @@
 package com.epam.model;
 
-public class Product {
+public class Product implements Cloneable
+{
 	private String name;
 	private int price;
 	private int quantity;
@@ -8,6 +9,14 @@ public class Product {
 	private int subcategory_id;
 	private int product_id;
 	
+	public Product( int maincategory_id, int subcategory_id, int product_id,String name, int price, int quantity) {
+		this.name = name;
+		this.price = price;
+		this.quantity = quantity;
+		this.maincategory_id = maincategory_id;
+		this.subcategory_id = subcategory_id;
+		this.product_id = product_id;
+	}
 	public int getMaincategory_id() {
 		return maincategory_id;
 	}
@@ -44,6 +53,13 @@ public class Product {
 	public void setProduct_id(int product_id) {
 		this.product_id = product_id;
 	}
+	
+    public Object clone() throws
+    CloneNotSupportedException 
+{ 
+return super.clone(); 
+} 
+	
 	
 
 }

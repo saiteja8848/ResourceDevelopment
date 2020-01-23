@@ -1,93 +1,59 @@
 package com.epam.InventroyManagementSystem;
 
 import java.util.Scanner;
-import com.epam.services.*;
-import com.epam.model.*;
-import java.util.ArrayList;
+import com.epam.services.ServiceInterface;
+import com.epam.services.ServicesImplementation;
 
 public class UserInteraction {
 	public static void main(String[] args) {
-       
 		try {
 		Scanner input = new Scanner(System.in);
-		int  choice =-1, category_option, subcategory_option, product_option;
-		ServicesInterface servicesinterface = new ServicesImplementation();
-		
-		servicesinterface.setAll();
-		while(choice !=4) {
-			System.out.println();
-		System.out.println("-----------------------");
-		System.out.println("Welcome to Epam's store");
-		System.out.println("-----------------------");
-		System.out.println("Activities");
-		System.out.println("----------");
-		System.out.println("1.shopping");
-		System.out.println("2.cart");
-		System.out.println("3.billing");
-		System.out.println("4.exit");
+		int  choice =-1, category_option, subcategory_option, product_option,quantity;
+		ServiceInterface serviceInterface = new ServicesImplementation();
+		serviceInterface.setAll();
+		while(choice !=4) 
+		{
+		System.out.println("\n-----------------------\nWelcome to Epam's store\n-----------------------");
+		System.out.println("Activities\n----------\n1.shopping\n2.cart\n3.billing\n4.exit");
 		System.out.print("Please enter your choice:");
 		choice = input.nextInt();
-		System.out.println();
-		
 		switch (choice) 
 		{
 		    case 1:
-			System.out.println("Categories");
-			System.out.println("----------");
-			ArrayList<Category> c = servicesinterface.getAllCategories();
-			
-			for (int i = 0; i < c.size(); i++)
-			System.out.println(c.get(i).getCategoryId() + "." + c.get(i).getCategoryName());
-			System.out.print("Please enter your choice:");
-			
-			category_option = input.nextInt();
-			System.out.println();
-			System.out.println("SubCategories");
-			System.out.println("-------------");
-			ArrayList<SubCategory> sc = servicesinterface.getsubCategories(category_option);
-			for (int i = 0; i < sc.size(); i++) {
-				if (sc.get(i).getMaincategory_id() == category_option)
-					System.out.println(sc.get(i).getSubcategory_id() + "." + sc.get(i).getSubcategory_name());
-			}
-			System.out.print("Please enter your choice:");
-			subcategory_option = input.nextInt();
-			System.out.println();
-			System.out.println("Products");
-			System.out.println("--------");
-			ArrayList<Product> p = servicesinterface.getProducts(subcategory_option);
-			for (int i = 0; i < p.size(); i++) 
-			{
-				if (p.get(i).getSubcategory_id() == subcategory_option&& p.get(i).getMaincategory_id() == category_option)
-					System.out.println(p.get(i).getProduct_id() + "." + "name=" + p.get(i).getName() + " price="+ p.get(i).getPrice()+ " Quantity="+p.get(i).getQuantity());
-			}
-			
-			System.out.print("Please enter your choice:");
-			product_option = input.nextInt();
-			System.out.println();
-			    for(int i=0;i<p.size();i++)
-				if(p.get(i).getProduct_id()==product_option&&p.get(i).getSubcategory_id()==subcategory_option&&p.get(i).getMaincategory_id()==category_option)
-					servicesinterface.addtocart(p.get(i));	
-			break;
+			      System.out.println("\nCategories\n----------");
+			      serviceInterface.printAllcategories();
+			      System.out.print("Please enter your choice:");
+			      category_option = input.nextInt();
+			      System.out.println();
+			      System.out.println("SubCategories\n-------------");
+			      serviceInterface.printAllsubCategoriesById(category_option);
+			      System.out.print("Please enter your choice:");
+			      subcategory_option = input.nextInt();
+			      System.out.println();
+		          System.out.println("Products\n--------");
+		          serviceInterface.printAllProductsById(category_option,subcategory_option);
+		          System.out.print("Please enter your choice:");
+	              product_option = input.nextInt();
+		          System.out.print("Enter no of quantities:");
+		          quantity = input.nextInt();
+		          serviceInterface.addProductToCart(category_option,subcategory_option,product_option,quantity);
+			break;		
 		    case 2:
-			System.out.println();
-			System.out.println("Products In Cart");
-			System.out.println("----------------");
-			servicesinterface.getcartItems();
+		     	 System.out.println("\nProducts In Cart\n----------------");
+			     serviceInterface.getProductsInCart();
 			break;
 	    	case 3:
-			System.out.println("Billing");
-			servicesinterface.billing();
+			     System.out.println("Billing\n-------");
+			     serviceInterface.billing();
 			break;
 		    case 4:
-			System.out.println("Thanks for visting the store");
-			System.exit(0);
+			     System.out.println("Thanks for visting the store");
+			     System.exit(0);
 			break;
 		    default:
-			System.out.println("Invalid Choice");
+			     System.out.println("Invalid Choice");
 		 }
-		
 		}
-		
 		input.close();
 		System.out.println();
 		}
@@ -95,10 +61,6 @@ public class UserInteraction {
 		{
 			System.out.println(e);
 		}
-		
-		
-		
-		
-		
+				
 	}
 }
