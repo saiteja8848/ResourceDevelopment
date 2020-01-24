@@ -22,18 +22,25 @@ public class UserInteraction {
 		    case 1:
 			      System.out.println("\nCategories\n----------");
 			      serviceInterface.printAllcategories();
-			      System.out.print("Please enter your choice:");
+			      System.out.print("Please enter your choice(enter -1 to return main menu):");
 			      category_option = input.nextInt();
-			      System.out.println();
-			      System.out.println("SubCategories\n-------------");
+			      if(category_option==-1)
+			    	UserInteraction.main(null);
+			       System.out.println();  
 			      serviceInterface.printAllsubCategoriesById(category_option);
-			      System.out.print("Please enter your choice:");
+			      System.out.print("Please enter your choice(enter -1 to return main menu):");
 			      subcategory_option = input.nextInt();
+			      if(subcategory_option==-1)
+				  UserInteraction.main(null);
 			      System.out.println();
-		          System.out.println("Products\n--------");
 		          serviceInterface.printAllProductsById(category_option,subcategory_option);
-		          System.out.print("Please enter your choice:");
+		          System.out.print("Please enter your choice(enter -1 to return main menu):");
 	              product_option = input.nextInt();
+	              if(product_option==-1)
+				   UserInteraction.main(null);
+	              else if(product_option>=4)
+	              { System.out.println("Wrong Input");}
+	              else
 		          System.out.print("Enter no of quantities:");
 		          quantity = input.nextInt();
 		          serviceInterface.addProductToCart(category_option,subcategory_option,product_option,quantity);
@@ -51,7 +58,9 @@ public class UserInteraction {
 			     System.exit(0);
 			break;
 		    default:
-			     System.out.println("Invalid Choice");
+			     System.out.println("------------Invalid Choice--------------");
+			     UserInteraction.main(null);
+			     //System.exit(0);
 		 }
 		}
 		input.close();
@@ -59,7 +68,8 @@ public class UserInteraction {
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			System.out.println("--------------MISMATCH--------------");
+			UserInteraction.main(null);
 		}
 				
 	}
