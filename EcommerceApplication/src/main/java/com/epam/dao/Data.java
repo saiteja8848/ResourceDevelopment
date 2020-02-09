@@ -14,14 +14,14 @@ class PrepareData {
 		category.setCategoryName(categoryName);
 	}
 
-	void setSubcategorys(String[] subcategorysList, String[] productsList,int[] quantity,int[] price) {
+	void setSubcategorys(String[] subcategorysList, String[] productsList, int[] quantity, int[] price) {
 		int count = 0;
 		int j = 0;
 		for (int i = 0; i <= 2; i++) {
 			Subcategory subcategory = new Subcategory((i + 1), subcategorysList[i]);
 			count = 1;
 			while (count != 3) {
-				subcategory.getProducts().add(new Product(count, productsList[j],quantity[j],price[j]));
+				subcategory.getProducts().add(new Product(count, productsList[j], quantity[j], price[j]));
 				j++;
 				count++;
 			}
@@ -34,8 +34,6 @@ class PrepareData {
 		return category;
 	}
 }
-
-
 
 class Composite implements ecommerce {
 	private List<ecommerce> ecommerceData = new ArrayList<ecommerce>();
@@ -55,8 +53,6 @@ class Composite implements ecommerce {
 
 }
 
-
-
 public class Data {
 	private Composite composite = new Composite();
 	private PrepareData preparedata1 = new PrepareData();
@@ -66,17 +62,17 @@ public class Data {
 		preparedata1.setCategory(1, "electronics");
 		String[] subcategorylist1 = { "mobiles", "Laptops", "Televisons" };
 		String[] productslist1 = { "samsung", "realme", "dell", "Hp", "sony", "oneplus" };
-		int[] quantitylist1 = {4,5,6,1,2,3};
-		int[] pricelist1 = {10000,21000,5000,50000,45000,60000};
-		preparedata1.setSubcategorys(subcategorylist1, productslist1,quantitylist1,pricelist1);
+		int[] quantitylist1 = { 4, 5, 6, 1, 2, 3 };
+		int[] pricelist1 = { 10000, 21000, 5000, 50000, 45000, 60000 };
+		preparedata1.setSubcategorys(subcategorylist1, productslist1, quantitylist1, pricelist1);
 		composite.addDetails(preparedata1.getCategory());
 
 		preparedata2.setCategory(2, "Fashion");
 		String[] subcategorylist2 = { "mens", "Womens", "Kids" };
 		String[] productslist2 = { "mens-1", "mens-2", "women-1", "women-2", "kid-1", "kid-2" };
-		int[] quantitylist2 = {4,5,6,1,2,3};
-		int[] pricelist2 = {1000,2100,5000,5000,4500,6000};
-		preparedata2.setSubcategorys(subcategorylist2, productslist2,quantitylist2,pricelist2);
+		int[] quantitylist2 = { 4, 5, 6, 1, 2, 3 };
+		int[] pricelist2 = { 1000, 2100, 5000, 5000, 4500, 6000 };
+		preparedata2.setSubcategorys(subcategorylist2, productslist2, quantitylist2, pricelist2);
 		composite.addDetails(preparedata2.getCategory());
 	}
 
@@ -97,9 +93,9 @@ public class Data {
 		for (Product e : p)
 			e.showDetails();
 	}
-   public Category get(int categoryOption) {
-	   return composite.getDetails(categoryOption);
-   }
-	
-}
 
+	public Category get(int categoryOption) {
+		return composite.getDetails(categoryOption);
+	}
+
+}

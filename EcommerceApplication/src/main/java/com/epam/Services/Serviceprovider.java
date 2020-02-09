@@ -1,7 +1,6 @@
 package com.epam.Services;
 
-import com.epam.dao.*;
-import com.epam.view.*;
+import com.epam.dao.Data;
 import java.util.ArrayList;
 import java.util.List;
 import com.epam.model.*;
@@ -41,9 +40,9 @@ public class Serviceprovider {
 			if (checkforExistence(product)) // true
 			{
 				int q = cartProducts.get(flag).getQuantity();
-				int k=q+quantity;
-				if(k<cartProducts.get(flag).getProduct().getQuantity())
-				cartProducts.get(flag).setQuantity(k);
+				int k = q + quantity;
+				if (k < cartProducts.get(flag).getProduct().getQuantity())
+					cartProducts.get(flag).setQuantity(k);
 				else
 					System.out.println("\nStock limit exceeded");
 			} else // false
@@ -79,21 +78,20 @@ public class Serviceprovider {
 			for (Cart cp : cartProducts)
 				System.out.println(cp.getProduct().getProductName() + " " + cp.getQuantity());
 	}
-	
-	public void billing()
-	{
-		if(cartProducts.size()==0)
+
+	public void billing() {
+		if (cartProducts.size() == 0)
 			System.out.println("no products in the cart for billing");
-		else{
-			for (Cart cp : cartProducts)
-			{System.out.println(cp.getProduct().getProductName() + " " + cp.getQuantity()+" "+cp.getProduct().getUnitPrice());
-			 int p=cp.getOriginalProduct().getQuantity() - cp.getQuantity();
-			 cp.getOriginalProduct().setQuantity(p);
+		else {
+			for (Cart cp : cartProducts) {
+				System.out.println(cp.getProduct().getProductName() + " " + cp.getQuantity() + " "
+						+ cp.getProduct().getUnitPrice());
+				int p = cp.getOriginalProduct().getQuantity() - cp.getQuantity();
+				cp.getOriginalProduct().setQuantity(p);
 			}
 			cartProducts.clear();
 		}
-			
+
 	}
-	
 
 }
