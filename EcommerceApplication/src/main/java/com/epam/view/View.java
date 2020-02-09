@@ -3,45 +3,72 @@ package com.epam.view;
 import com.epam.Services.*;
 import java.util.Scanner;
 
+
 public class View {
+	private static Scanner input = new Scanner(System.in);
+	static int readInput() {
+		int enteredchoice;
+		System.out.print("please enter your choice (press -1 to return to main menu):");
+		enteredchoice = input.nextInt();
+		if(enteredchoice == -1)
+			View.main(null);
+		return enteredchoice;
+	}
+
 	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
+		int choice = -1;
+		String[] useroptions = { "Categories", "Cart", "Billing", "Exit" };
+		int categoryOption;
+		int subcategoryOption;
+		int productOption;
+		int quantity;
 		Serviceprovider serviceprovider = new Serviceprovider();
-		System.out.println("-----------------------");
-		System.out.println("Welcome to Epam's Store");
-		System.out.println("-----------------------");
-		System.out.println("Activites");
-		System.out.println("---------");
-		System.out.println("1.Categories\n2.Cart\n3.Billing\n4.Exit");
-		System.out.print("Please enter your Choice:");
-		int choice = input.nextInt();
-		switch (choice) {
-		case 1:
-			System.out.println("\nCategories");
-			System.out.println("----------");
-			serviceprovider.loadData();
-			System.out.print("please enter your choice:");
-			int categoryOption = input.nextInt();
-			System.out.println("\nSubCategories");
-			System.out.println("-------------");
-			serviceprovider.printSubCategorysById(categoryOption);
-			System.out.print("please enter your choice:");
-			int subcategoryOption = input.nextInt();
-			System.out.println("\nProducts");
-			System.out.println("--------");
-			serviceprovider.printProductsById(categoryOption, subcategoryOption);
-			System.out.print("please enter your choice:");
+		
+		
+		while(choice!=4) {
+		
+        try {
+		System.out.println("\n-----------------------\nWelcome to Epam's Store\n-----------------------");
+		System.out.print("Activites\n---------\n1.Categories\n2.Cart\n3.Billing\n4.Exit\nPlease enter your Choice:");
+		choice = input.nextInt();
+		switch (useroptions[choice - 1]) {
+		case "Categories":
+            System.out.println("\nCategories\n----------");
+            serviceprovider.showCategories();
+            categoryOption =readInput();
+            System.out.println("\nSubcategories\n-------------");
+            serviceprovider.showSubCategorysById(categoryOption-1);
+            subcategoryOption = readInput();
+            System.out.println("\nProducts\n---------");
+            serviceprovider.showProductsById(categoryOption-1,subcategoryOption-1);
+            productOption = readInput();
+            if(productOption>2)
+            	System.out.println("Invalid Input");
+            else
+            {System.out.print("Please enter quantity:");
+        	quantity = input.nextInt();
+        	serviceprovider.addproductToCart(categoryOption-1,subcategoryOption-1,productOption-1,quantity);
+        	
+            }	            
 			break;
-		case 2:
-			System.out.println("Cart");
+		case "Cart":
+			System.out.println("ProductsInCart\n---------------");
+			serviceprovider.showcartProducts();
 			break;
-		case 3:
-			System.out.println("Billing");
+		case "Billing":
+			System.out.println("Billing\n--------");
+			serviceprovider.billing();
 			break;
-		case 4:
-			System.out.println("Thank you for visting the Store");
+		case "Exit":
+			System.out.println("\nThank you for visting the Store");
 			System.exit(0);
 		}
+		  
+        }catch(Exception e)
+        {System.out.println(e);}
+		
+		}
 		input.close();
+		
 	}
 }

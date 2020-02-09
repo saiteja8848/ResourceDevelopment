@@ -5,69 +5,101 @@ import java.util.List;
 import com.epam.model.*;
 import com.epam.Services.*;
 
-public class Data implements ecommerce {
-	List<ecommerce> ecommerceData = new ArrayList<ecommerce>();
+class PrepareData {
+	public Category category = new Category();
+	public List<Subcategory> subcategorys = new ArrayList<Subcategory>();
 
-	public Data() {
-		addValue(new Category(1, "Electronics", getSubcategoryList(1)));
-		addValue(new Category(2, "Fashion", getSubcategoryList(2)));
-		showDetails();
+	void setCategory(int categoryId, String categoryName) {
+		category.setCategoryId(categoryId);
+		category.setCategoryName(categoryName);
 	}
 
-	List<Subcategory> getSubcategoryList(int v) {
-		List<Subcategory> list = new ArrayList<Subcategory>();
-		if (v == 1) {
-			list.add(new Subcategory(1, "Mobiles", getProductList(1)));
-			list.add(new Subcategory(2, "Laptops", getProductList(2)));
-			list.add(new Subcategory(3, "Televisions", getProductList(3)));
-		} else {
-			list.add(new Subcategory(1, "Mens", getProductList(4)));
-			list.add(new Subcategory(2, "Womens", getProductList(5)));
-			list.add(new Subcategory(3, "Kids", getProductList(6)));
+	void setSubcategorys(String[] subcategorysList, String[] productsList,int[] quantity,int[] price) {
+		int count = 0;
+		int j = 0;
+		for (int i = 0; i <= 2; i++) {
+			Subcategory subcategory = new Subcategory((i + 1), subcategorysList[i]);
+			count = 1;
+			while (count != 3) {
+				subcategory.getProducts().add(new Product(count, productsList[j],quantity[j],price[j]));
+				j++;
+				count++;
+			}
+			subcategorys.add(subcategory);
 		}
-		return list;
+		category.setSubcategorys(subcategorys);
 	}
 
-	List<Product> getProductList(int v) {
-		List<Product> list = new ArrayList<Product>();
-		if (v == 1) {
-			list.add(new Product(1, "samsung"));
-			list.add(new Product(2, "iphone"));
-			list.add(new Product(3, "realme"));
-		} else if (v == 2) {
-			list.add(new Product(1, "DELL"));
-			list.add(new Product(2, "HP"));
-			list.add(new Product(3, "MAC"));
-		} else if (v == 3) {
-			list.add(new Product(1, "LG"));
-			list.add(new Product(2, "SONY"));
-			list.add(new Product(3, "ONIDA"));
-		}
-		return list;
+	public Category getCategory() {
+		return category;
 	}
+}
+
+
+
+class Composite implements ecommerce {
+	private List<ecommerce> ecommerceData = new ArrayList<ecommerce>();
 
 	public void showDetails() {
-		for (ecommerce value : ecommerceData)
-			value.showDetails();
+		for (ecommerce e : ecommerceData)
+			e.showDetails();
 	}
 
-	public void addValue(ecommerce anyType) {
-		ecommerceData.add(anyType);
+	public void addDetails(ecommerce anyImplementationclass) {
+		ecommerceData.add(anyImplementationclass);
 	}
 
-	public void printSubCategorys(int categoryOption) {
-		Category category = (Category) ecommerceData.get(categoryOption);
-		List<Subcategory> subcategory = category.getSubcategorys();
-		for (int index = 0; index < subcategory.size(); index++)
-			subcategory.get(index).showDetails();
-	}
-
-	public void printProducts(int categoryOption, int subcategoryOption) {
-		Category category = (Category) ecommerceData.get(categoryOption);
-		List<Product> product = category.getSubcategorys().get(subcategoryOption).getProducts();
-		for (int index = 0; index < product.size(); index++)
-			product.get(index).showDetails();
-
+	public Category getDetails(int categoryOption) {
+		return (Category) ecommerceData.get(categoryOption);
 	}
 
 }
+
+
+
+public class Data {
+	private Composite composite = new Composite();
+	private PrepareData preparedata1 = new PrepareData();
+	private PrepareData preparedata2 = new PrepareData();
+
+	public void setData() {
+		preparedata1.setCategory(1, "electronics");
+		String[] subcategorylist1 = { "mobiles", "Laptops", "Televisons" };
+		String[] productslist1 = { "samsung", "realme", "dell", "Hp", "sony", "oneplus" };
+		int[] quantitylist1 = {4,5,6,1,2,3};
+		int[] pricelist1 = {10000,21000,5000,50000,45000,60000};
+		preparedata1.setSubcategorys(subcategorylist1, productslist1,quantitylist1,pricelist1);
+		composite.addDetails(preparedata1.getCategory());
+
+		preparedata2.setCategory(2, "Fashion");
+		String[] subcategorylist2 = { "mens", "Womens", "Kids" };
+		String[] productslist2 = { "mens-1", "mens-2", "women-1", "women-2", "kid-1", "kid-2" };
+		int[] quantitylist2 = {4,5,6,1,2,3};
+		int[] pricelist2 = {1000,2100,5000,5000,4500,6000};
+		preparedata2.setSubcategorys(subcategorylist2, productslist2,quantitylist2,pricelist2);
+		composite.addDetails(preparedata2.getCategory());
+	}
+
+	public void printCategorysData() {
+		composite.showDetails();
+	}
+
+	public void printSubCategorysData(int categoryOption) {
+		Category category = composite.getDetails(categoryOption);
+		List<Subcategory> sc = category.getSubcategorys();
+		for (Subcategory e : sc)
+			e.showDetails();
+	}
+
+	public void printProductsData(int categoryOption, int subcategoryOption) {
+		Category category = composite.getDetails(categoryOption);
+		List<Product> p = category.getSubcategorys().get(subcategoryOption).getProducts();
+		for (Product e : p)
+			e.showDetails();
+	}
+   public Category get(int categoryOption) {
+	   return composite.getDetails(categoryOption);
+   }
+	
+}
+

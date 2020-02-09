@@ -1,18 +1,19 @@
 package com.epam.model;
 
 import java.util.List;
+import java.util.ArrayList;
 import com.epam.Services.*;
 
 public class Category implements ecommerce
 {
    int categoryId;
    String categoryName;
-   List<Subcategory> subcategorys;
-   
-public Category(int categoryId, String categoryName, List<Subcategory> subcategorys) {
+    List<Subcategory> subcategorys = new ArrayList<Subcategory>();
+   public Category() {}
+    
+public Category(int categoryId, String categoryName) {
 	this.categoryId = categoryId;
 	this.categoryName = categoryName;
-	this.subcategorys = subcategorys;
 }
 public int getCategoryId() {
 	return categoryId;
