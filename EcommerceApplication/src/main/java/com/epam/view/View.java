@@ -2,9 +2,12 @@ package com.epam.view;
 
 import com.epam.Services.*;
 import java.util.Scanner;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class View {
 	private static Scanner input = new Scanner(System.in);
+	private static Logger logger = LogManager.getLogger(View.class);
 
 	static int readInput() {
 		int enteredchoice;
@@ -16,6 +19,11 @@ public class View {
 	}
 
 	public static void main(String[] args) {
+		logger.info("info");
+        logger.debug("debug");
+        logger.fatal("fatal");
+        logger.warn("warn");
+		
 		int choice = -1;
 		String[] useroptions = { "Categories", "Cart", "Billing", "Exit" };
 		int categoryOption;
@@ -25,7 +33,7 @@ public class View {
 		Serviceprovider serviceprovider = new Serviceprovider();
 
 		try {
-
+Scanner input = new Scanner(System.in);
 			while(choice!=4) 
 			{
 				System.out.println("\n-----------------------\nWelcome to Epam's Store\n-----------------------");
@@ -51,11 +59,11 @@ public class View {
 					}
 					break;
 				case "Cart":
-					System.out.println("ProductsInCart\n---------------");
+					System.out.println("\nProductsInCart\n---------------");
 					serviceprovider.showcartProducts();
 					break;
 				case "Billing":
-					System.out.println("Billing\n--------");
+					System.out.println("\nBilling\n--------");
 					serviceprovider.billing();
 					break;
 				case "Exit":
@@ -68,7 +76,8 @@ public class View {
 		}
 		catch(Exception e)
 		{
-			System.out.println("INPUT MISMATCH");
+			System.out.println("\nINPUT MISMATCH");
+			View.main(null);
 		}
 			
 			
