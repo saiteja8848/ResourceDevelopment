@@ -1,12 +1,19 @@
 package com.epam.model;
 
-import com.epam.Services.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class Product implements ecommerce {
+import com.epam.services.*;
+
+
+public class Product implements Ecommerce {
+	
+	private static Logger logger = LogManager.getLogger(Product.class);
 	int productId;
 	String productName;
 	int quantity;
 	int unitPrice;
+	
 	public Product() {}
 	public Product(Product p){
 		productId = p.getProductId();
@@ -55,6 +62,6 @@ public class Product implements ecommerce {
 	}
 
 	public void showDetails() {
-		System.out.println(productId + "." + productName+ " "+unitPrice+" "+quantity);
+	logger.info("{}{}   {}\t {}\t\t{}","\n",productId,productName,unitPrice,quantity);
 	}
 }

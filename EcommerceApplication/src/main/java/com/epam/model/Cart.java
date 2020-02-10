@@ -3,6 +3,9 @@ package com.epam.model;
 public class Cart {
 	int categoryId;
 	int subcategoryId;
+	int quantity;
+	Product product;
+	Product originalProduct;
 	public Product getOriginalProduct() {
 		return originalProduct;
 	}
@@ -11,8 +14,7 @@ public class Cart {
 		this.originalProduct = originalProduct;
 	}
 
-	int quantity;
-	Product product,originalProduct;
+	
 	public int getQuantity() {
 		return quantity;
 	}

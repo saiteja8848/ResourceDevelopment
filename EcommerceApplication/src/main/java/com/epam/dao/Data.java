@@ -3,11 +3,11 @@ package com.epam.dao;
 import java.util.ArrayList;
 import java.util.List;
 import com.epam.model.*;
-import com.epam.Services.*;
+import com.epam.services.*;
 
 class PrepareData {
-	public Category category = new Category();
-	public List<Subcategory> subcategorys = new ArrayList<Subcategory>();
+	private Category category = new Category();
+	private List<Subcategory> subcategorys = new ArrayList<>();
 
 	void setCategory(int categoryId, String categoryName) {
 		category.setCategoryId(categoryId);
@@ -15,15 +15,15 @@ class PrepareData {
 	}
 
 	void setSubcategorys(String[] subcategorysList, String[] productsList, int[] quantity, int[] price) {
-		int count = 0;
+		int productcount = 0;
 		int j = 0;
 		for (int i = 0; i <= 2; i++) {
 			Subcategory subcategory = new Subcategory((i + 1), subcategorysList[i]);
-			count = 1;
-			while (count != 3) {
-				subcategory.getProducts().add(new Product(count, productsList[j], quantity[j], price[j]));
+			productcount = 1;
+			while (productcount != 3) {
+				subcategory.getProducts().add(new Product(productcount, productsList[j], quantity[j], price[j]));
 				j++;
-				count++;
+				productcount++;
 			}
 			subcategorys.add(subcategory);
 		}
@@ -35,15 +35,17 @@ class PrepareData {
 	}
 }
 
-class Composite implements ecommerce {
-	private List<ecommerce> ecommerceData = new ArrayList<ecommerce>();
+
+
+class Composite implements Ecommerce {
+	private List<Ecommerce> ecommerceData = new ArrayList<>();
 
 	public void showDetails() {
-		for (ecommerce e : ecommerceData)
-			e.showDetails();
+		for (Ecommerce ecommerceList : ecommerceData)
+			ecommerceList.showDetails();
 	}
 
-	public void addDetails(ecommerce anyImplementationclass) {
+	public void addDetails(Ecommerce anyImplementationclass) {
 		ecommerceData.add(anyImplementationclass);
 	}
 
@@ -52,6 +54,8 @@ class Composite implements ecommerce {
 	}
 
 }
+
+
 
 public class Data {
 	private Composite composite = new Composite();
@@ -82,16 +86,16 @@ public class Data {
 
 	public void printSubCategorysData(int categoryOption) {
 		Category category = composite.getDetails(categoryOption);
-		List<Subcategory> sc = category.getSubcategorys();
-		for (Subcategory e : sc)
-			e.showDetails();
+		List<Subcategory> subcategoryList = category.getSubcategorys();
+		for (Subcategory subcategory : subcategoryList)
+			subcategory.showDetails();
 	}
 
 	public void printProductsData(int categoryOption, int subcategoryOption) {
 		Category category = composite.getDetails(categoryOption);
-		List<Product> p = category.getSubcategorys().get(subcategoryOption).getProducts();
-		for (Product e : p)
-			e.showDetails();
+		List<Product> productList = category.getSubcategorys().get(subcategoryOption).getProducts();
+		for (Product product : productList)
+			product.showDetails();
 	}
 
 	public Category get(int categoryOption) {

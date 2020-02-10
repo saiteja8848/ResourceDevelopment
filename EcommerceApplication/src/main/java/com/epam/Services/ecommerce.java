@@ -1,5 +1,5 @@
-package com.epam.Services;
+package com.epam.services;
 
-public interface ecommerce {
+public interface Ecommerce {
 	public void showDetails();
 }

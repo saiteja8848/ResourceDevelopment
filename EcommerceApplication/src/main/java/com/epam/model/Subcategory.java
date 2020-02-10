@@ -1,14 +1,19 @@
 package com.epam.model;
 
 import java.util.List;
-import com.epam.Services.*;
 import java.util.ArrayList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class Subcategory implements ecommerce
+import com.epam.services.Ecommerce;
+
+
+public class Subcategory implements Ecommerce
 {
+	 private static Logger logger = LogManager.getLogger(Subcategory.class);
 	 int subcategoryId;
 	 String subcategoryName;
-	 List<Product> products= new ArrayList<Product>();
+	 List<Product> products= new ArrayList<>();
 	 
 	 public Subcategory() {}
 	 
@@ -35,7 +40,7 @@ public class Subcategory implements ecommerce
 		this.products = products;
 	}
 	public void showDetails() {
-		System.out.println(subcategoryId+"."+subcategoryName);
+		logger.info("{}{}.{}","\n",subcategoryId,subcategoryName);
 	}
 	 
 }
