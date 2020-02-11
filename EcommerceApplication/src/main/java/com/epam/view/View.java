@@ -3,7 +3,7 @@ package com.epam.view;
 import java.util.Scanner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
+import com.epam.dao.*;
 import com.epam.services.*;
 
 public class View {
@@ -20,6 +20,7 @@ public class View {
 	}
 
 	public static void main(String[] args) {
+		
 		int choice = -1;
 		int categoryOption;
 		int subcategoryOption;
@@ -76,6 +77,5 @@ public class View {
 			logger.info("{}INPUT MISMATCH{}", "\n", "\n");
 			View.main(null);
 		}
-
 	}
 }
