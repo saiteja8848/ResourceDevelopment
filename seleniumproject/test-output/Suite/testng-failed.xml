@@ -7,7 +7,6 @@
         <methods>
           <include name="beforeMethod"/>
           <include name="staysTest"/>
-          <include name="tearDown"/>
           <include name="setUp"/>
         </methods>
       </class> <!-- com.epam.testpages.StaysTestPage -->

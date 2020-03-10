@@ -1,0 +1,66 @@
+
+
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg>
+
+<div class="bui-calendar__control bui-calendar__control--next" data-bui-ref="calendar-next">
+
+
+
+
+//input[@name="checkin_month"]
+//input[@name="checkin_year"]
+
+
+
+
+
+
+
+
+
+
+
+<span class="xp__guests__count">
+//div[@class="u-clearfix"]/descendant::div[@class="bui-stepper"][]
+
+
+
+
+
+
+//button[@aria-label="Increase number of Children"]
+//button[@aria-label="Decrease number of Children"]
+
+
+//button[@aria-label="Increase number of Adults"]
+//button[@aria-label="Decrease number of Adults"]
+
+//button[@aria-label="Increase number of Rooms"]
+//button[@aria-label="Decrease number of Rooms"]
+
+
+
+//label[@for="sb_travel_purpose_checkbox"]
+
+
+//div[@data-bui-ref=\"calendar-next\"]
+//div[@data-bui-ref=\"calendar-prev\"]
+
+
+
+
+
+
+ By dateSearchBox=By.xpath("//span[@class=\"sb-date-field__icon sb-date-field__icon-btn bk-svg-wrapper calendar-restructure-sb\"]" ); 
+		  driver.findElement(dateSearchBox).click();
+		  
+		  String checkIn="2020-05-20";
+		  By checkInDateXPath =By.xpath("//td[@data-date=\""+checkIn+"\"]");
+		  
+		  while(driver.findElements(checkInDateXPath).size() <=0)
+		  {
+			  driver.findElement(By.xpath("//div[@data-bui-ref=\"calendar-next\"]")).click();
+		  }
+		  driver.findElement(checkInDateXPath).click();
+
+

@@ -1,5 +1,7 @@
 package com.epam.utilites;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,4 +34,13 @@ public abstract class Page {
 		webElement.clear();
 	}
 
+	public void implicitWait(long time) {
+		webDriver.manage().timeouts().implicitlyWait(time, TimeUnit.MILLISECONDS);
+	}
+	
+	
+	public void closePage() {
+		webDriver.close();
+	}
+	
 }

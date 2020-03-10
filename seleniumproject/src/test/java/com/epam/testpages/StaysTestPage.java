@@ -18,8 +18,10 @@ public class StaysTestPage extends TestController {
 	public void staysTest() {
 		staysPage.openPage();
 		staysPage.setCityName("hyderabad");
-		staysPage.setDate("2020-03-29","2020-04-25");
+		staysPage.setDate("2020-03-19","2020-04-15");
+		staysPage.setNoofAdults(10);
 		staysPage.search();
+		staysPage.closePage();
 	}
 	
 	
