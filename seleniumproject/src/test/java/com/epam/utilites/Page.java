@@ -38,6 +38,10 @@ public abstract class Page {
 		webDriver.manage().timeouts().implicitlyWait(time, TimeUnit.MILLISECONDS);
 	}
 	
+	public WebDriver getDriver() {
+		return webDriver;
+	}
+	
 	
 	public void closePage() {
 		webDriver.close();

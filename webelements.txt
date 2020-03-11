@@ -51,16 +51,46 @@
 
 
 
- By dateSearchBox=By.xpath("//span[@class=\"sb-date-field__icon sb-date-field__icon-btn bk-svg-wrapper calendar-restructure-sb\"]" ); 
-		  driver.findElement(dateSearchBox).click();
-		  
-		  String checkIn="2020-05-20";
-		  By checkInDateXPath =By.xpath("//td[@data-date=\""+checkIn+"\"]");
-		  
-		  while(driver.findElements(checkInDateXPath).size() <=0)
-		  {
-			  driver.findElement(By.xpath("//div[@data-bui-ref=\"calendar-next\"]")).click();
-		  }
-		  driver.findElement(checkInDateXPath).click();
+ 
 
 
+
+
+----->Flights Page WebElements:
+      ------------------------
+roundTrip:
+---------
+(from)//input[@aria-label="Flight origin input"]
+(where)//input[@aria-label="Flight destination input"]
+(calendar)//div[@aria-label="Calendar icon"]
+(adults)//a[@aria-label="Select number of travelers and cabin class"]
+oneWay:
+-------
+
+MultiCity:
+---------
+
+
+---->Car Rentals Page WebElements:
+     ----------------------------
+
+(location)//input[@placeholder="Pick-up location"]
+(search)//button[@class="sb-searchbox__button "]
+(return to)//input[@id="return-location-same"]
+(drivers age)//input[@name="driversAgeCheckbox"]
+//input[@placeholder="Drop-off location"]
+//input[@id="return-location-different"]
+
+
+
+
+
+---->AirPort Taxis Page WebElement:
+     -----------------------------
+//input[@id="pickupLocation"]
+//input[@id="dropoffLocation"]
+//button[@data-test="pickup-date"]
+//button[@aria-label="pickup time input field"]
+//select[@id="passengers"]
+oneway//input[@id="returnJourneyNegative"]
+return//input[@id="returnJourneyAffirmative"]
