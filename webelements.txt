@@ -74,12 +74,16 @@ MultiCity:
 ---->Car Rentals Page WebElements:
      ----------------------------
 
-(location)//input[@placeholder="Pick-up location"]
+
 (search)//button[@class="sb-searchbox__button "]
 (return to)//input[@id="return-location-same"]
 (drivers age)//input[@name="driversAgeCheckbox"]
 //input[@placeholder="Drop-off location"]
 //input[@id="return-location-different"]
+
+
+
+//span[@class="c2-day-inner"]
 
 
 
@@ -94,3 +98,8 @@ MultiCity:
 //select[@id="passengers"]
 oneway//input[@id="returnJourneyNegative"]
 return//input[@id="returnJourneyAffirmative"]
+
+
+
+
+//*[@id="frm"]/div[2]/div[1]/div/div[1]/ul[1]/li[1]

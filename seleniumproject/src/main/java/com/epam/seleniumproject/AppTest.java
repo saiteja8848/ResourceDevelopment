@@ -2,6 +2,8 @@ package com.epam.seleniumproject;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -17,6 +19,6 @@ public class AppTest {
         System.out.println(cellvalue);
         System.out.println(s.getPhysicalNumberOfRows());
 		
-		
+       // Logger logger =LogManager.getLogger(pratice.class);
 	}
 }
