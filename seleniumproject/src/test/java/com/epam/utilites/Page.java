@@ -22,8 +22,8 @@ public abstract class Page {
 		webElement = webDriver.findElement(selector);
 	}
 
-	public void sendKeys(String value) {
-		webElement.sendKeys(value);
+	public void sendKeys(String age) {
+		webElement.sendKeys(age);
 	}
 
 	public void click() {

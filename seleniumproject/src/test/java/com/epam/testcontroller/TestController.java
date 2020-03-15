@@ -21,9 +21,8 @@ public class TestController {
 		
 	}
 
-	@AfterClass
-	public void tearDown() {
-		webDriver.quit();
-	}
+	/*
+	 * @AfterClass public void tearDown() { //webDriver.quit(); }
+	 */
 	
 }

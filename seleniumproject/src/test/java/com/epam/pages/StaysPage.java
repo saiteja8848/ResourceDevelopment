@@ -18,7 +18,6 @@ public class StaysPage extends Page {
 	}
 
 	public void openPage() {
-		System.out.println("OPENING THIS PAGE!!!!!!!!!!!!!!!!!!!!!");
 		openPage(url);
 	}
 
