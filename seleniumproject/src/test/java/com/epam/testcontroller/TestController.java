@@ -18,11 +18,12 @@ public class TestController {
 		ConfigurationFilePath = "src/test/resources/properties/config.properties";
 		readUtilites = new ReadConfigProperties(ConfigurationFilePath);
 		webDriver = readUtilites.getBrowser();
-		
+
 	}
 
-	/*
-	 * @AfterClass public void tearDown() { //webDriver.quit(); }
-	 */
-	
+	@AfterClass
+	public void tearDown() {
+		webDriver.quit();
+	}
+
 }

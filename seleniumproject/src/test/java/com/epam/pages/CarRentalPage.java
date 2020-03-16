@@ -1,57 +1,95 @@
 package com.epam.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-import com.epam.utilites.Page;
 
-public class CarRentalPage extends Page {
+public class CarRentalPage {
 
-	private By pickupWebElement = By.xpath("//input[@id=\"ss_origin\"]");
 	
-	private By returnRadioButton = By.xpath("//label[@for=\"return-location-different\"]");
-	private By dropoffWebElement = By.xpath("//input[@id=\"ss\"]");
-	private By driverAgeCheckBox = By.xpath("//span[@class=\"bui-checkbox__label\"]");
-	private By driverAgeText = By.xpath("//input[@id=\"driverAgeInput\"]");
-	private By searchWebElement = By.xpath("//button[@class=\"sb-searchbox__button \"]");
-	private By openCalender = By.xpath("//div[@class=\"xp__dates-inner\"]");
-	private String url = "http://www.booking.com";
+	@FindBy(xpath="//span[@class='xpb__link__text']")
+	private WebElement carRentalsLink;
+	
+	@FindBy(xpath="//input[@id=\"ss_origin\"]")
+	private WebElement pickupWebElement;
+	
+	@FindBy(xpath="//label[@for=\"return-location-different\"]")
+	private WebElement returnRadioButton;
+	
+	@FindBy(xpath="//input[@id=\"ss\"]")
+	private  WebElement dropoffWebElement;
+	
+	@FindBy(xpath="//span[@class=\"bui-checkbox__label\"]")
+	private WebElement driverAgeCheckBox;
+	
+	@FindBy(xpath="//input[@id=\"driverAgeInput\"]")
+	private WebElement driverAgeText;
+	
+	@FindBy(xpath="//button[@class=\"sb-searchbox__button \"]")
+	private WebElement searchWebElement;
+	
+	@FindBy(xpath="//div[@class=\"xp__dates-inner\"]")
+	private WebElement openCalender;
+	
+	@FindBy(xpath="//div[@data-mode=\"checkin\"]//button")
+	private WebElement checkInDate;
 
-	public CarRentalPage(WebDriver webDriver) {
-		super(webDriver);
+	private WebDriver driver;
+	
+	private String url="https://www.booking.com";
+	
+	public CarRentalPage(WebDriver driver) {
+		this.driver=driver;
+		PageFactory.initElements(driver,this);
 	}
 
-	public void open() {
-		openPage(url);
-		getDriver().findElement(By.xpath("//span[@class='xpb__link__text']")).click();
+	public void openPage() {
+		driver.get(url);
+		carRentalsLink.click();
 	}
+	
+	public void setData(String from,String to,String DriversAge) {
+		if(from.equalsIgnoreCase(to))
+			setPickUp(from);
+		else {
+			setPickUp(from);
+			gotoDifferntPlace();
+			setDropOff(to);
+		   }
+		int age=Integer.parseInt(DriversAge);
+		if(age<30||age>66)
+			setDriverAge(Integer.toString(age));
+	}
+	
 
 	public void setPickUp(String place) {
-		findElement(pickupWebElement);
-		sendKeys(place);
-		System.out.println(place);
+		pickupWebElement.sendKeys(place);
 	}
 
 	public void gotoDifferntPlace() {
-		findElement(returnRadioButton);
-		click();
+		returnRadioButton.click();
 	}
 
 	public void setDropOff(String place) {
-		findElement(dropoffWebElement);
-		sendKeys(place);
+	    dropoffWebElement.sendKeys(place);
 	}
 	
 	public void setDriverAge(String age) {
-		findElement(driverAgeCheckBox);click();
-		findElement(driverAgeText);
-		sendKeys(age);
+	    driverAgeCheckBox.click();
+		driverAgeText.sendKeys(age);
+	}
+		
+	public void setDate() {
+     	driver.findElement(By.xpath("//div[@data-mode=\"checkin\"]//button")).click();
+     	
 	}
 	
-	
 	public void search() {
-		findElement(searchWebElement);
-		click();
+		searchWebElement.click();
 	}
 
 }
